@@ -13,6 +13,8 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error: err });
   });
+app.use('/api', router)
+
 const passport = require('passport');
 app.get('/', (req, res) => {
     res.send('Hello World!')
