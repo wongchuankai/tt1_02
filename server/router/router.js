@@ -6,10 +6,15 @@ const user_controller = require('../controller/user-controller')
 const shop_controller = require('../controller/shop-controller');
 const pool = require('../db/db');
 
+<<<<<<< HEAD
 router.get("/test", (res, req) => {
     
 })
+=======
+router.post("/test", user_controller.test)
+>>>>>>> f60d3b529dd734ed9c02ac8fa9bfea03abd6951d
 router.post("/signup", user_controller.signup )
+router.get('/getAllCustomer', user_controller.getAllCustomer)
 router.post(
     '/login',
     async (req, res, next) => {

@@ -12,6 +12,7 @@ import {
 import Home from "./components/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import products from "./Dataset/products.json";
+import categories from "./Dataset/categories.json";
 import Cart from "./components/Cart";
 
 function App() {
@@ -32,20 +33,14 @@ function App() {
   };
 
   const onRemove = (id) => {
-    const exists = cart.find((item) => item.id === id);
-    if (exists.amount === 1) {
-      setCart(cart.filter((item) => item.id !== id));
-    } else {
-      setCart(
-        cart.map((item) =>
-          item.id === id ? { ...exists, amount: exists.amount - 1 } : item
-        )
-      );
-    }
+    setCart(cart.filter((item) => item.id !== id));
   };
 
   const onChangeAmt = (id, direction) => {
-    if (cart.find((item) => item.id === id).amount === 1) {
+    if (
+      direction === "dec" &&
+      cart.find((item) => item.id === id).amount === 1
+    ) {
       return setCart(cart.filter((item) => item.id !== id));
     }
     setCart(
@@ -57,9 +52,9 @@ function App() {
               direction === "inc" ? (item.amount += 1) : (item.amount -= 1),
           };
         }
+        return item;
       })
     );
-    // remove from cart if decrease from 1 to 0
   };
 
   // getProducts, useEffect
@@ -72,7 +67,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/products">
-          <Products products={products} onAdd={onAdd} />
+          <Products products={products} categories={categories} onAdd={onAdd} />
         </Route>
         <Route exact path="/checkout">
           <Checkout />
