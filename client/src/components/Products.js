@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Product from "./Product";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, Button } from "react-bootstrap";
 
+import axios from "axios";
+
+const backendURL = process.env.BACKEND_URL || 'http://localhost:80';
+
 const Products = ({ products, onAdd, categories }) => {
   const [currentCategory, setCurrentCategory] = useState(1);
+
+  useEffect(()=> {
+    axios.get(`${backendURL}/`).then(response => {console.log(response)})
+  })
 
   return (
     <main className="block">
