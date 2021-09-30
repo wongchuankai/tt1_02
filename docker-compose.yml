@@ -11,7 +11,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
     ports: 
-      - 80:80
+      - 80:8000
     networks:
       - dbs-net
 
@@ -20,7 +20,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports: 
-      - 81:80
+      - 81:3000
     networks:
       - dbs-net
 
