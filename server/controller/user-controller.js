@@ -122,9 +122,31 @@ const getAllCustomer = (req, res) => {
         return res.status(200).json(results.rows)
     })
 }
+
+const addtocart =(req, res) => {
+    const id =req.id
+    const username = req.username
+    pool.query(queries.addtocartUser, (error, results) => {
+        if(error) {
+            console.log(error)
+
+            return res.status(200).json({
+                results: []
+            })
+        }
+        return res.status(200).json({
+            results: {
+                success: true,
+                msg:"added to cart"
+            }
+            
+        })
+    })
+}
 module.exports = {
     signup,
     login,
     test,
-    getAllCustomer
+    getAllCustomer,
+    addtocart
 }

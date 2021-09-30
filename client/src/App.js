@@ -14,7 +14,7 @@ import categoriesRaw from "./Dataset/categories.json";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import useToken from "./components/useToken";
-
+// import login from "./components/Login"
 // function setToken(userToken) {
 //     sessionStorage.setItem('token', JSON.stringify(userToken));
 //   }
@@ -29,12 +29,12 @@ function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState(productsRaw);
   const [categories, setCategories] = useState(categoriesRaw);
-
+  const [ islogin , setlogin ] = useState(false)
   const { token, setToken } = useToken();
 
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
 
   // async function getProducts() {
   //   try {
@@ -72,6 +72,7 @@ function App() {
     } else {
       setCart([...cart, { ...product, amount: 1 }]);
     }
+    
   };
 
   const onRemove = (id) => {
@@ -125,11 +126,17 @@ function App() {
   };
 
   // getProducts, useEffect
+  if(islogin) {
+    
+  }
 
   return (
+    
     <Router>
-      <Topnavbar />
       <Switch>
+        {islogin &&
+          <div>
+            <Topnavbar />
         <Route exact path="/products">
           <Products products={products} categories={categories} onAdd={onAdd} />
         </Route>
@@ -141,6 +148,13 @@ function App() {
             onCheckout={onCheckout}
           />
         </Route>
+          </div>
+        }
+        {
+          !islogin && 
+        <Route exact path="/login"  render={() => <Login setlogin={setlogin} setToken={setToken} loginset={setlogin}/>}/>
+
+        }
       </Switch>
     </Router>
   );

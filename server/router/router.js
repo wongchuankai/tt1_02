@@ -10,6 +10,6 @@ router.post("/test", user_controller.test)
 router.post("/signup", user_controller.signup )
 router.get('/getAllCustomer', user_controller.getAllCustomer)
 router.post('/login', user_controller.login);
-
+router.post('/addtocart', user_controller.addtocart);
 
 module.exports = router

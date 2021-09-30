@@ -2,7 +2,7 @@ const signUpQuery = "INSERT INTO Customer(username, password, first_name, last_n
 const getUser = "Select * from users where username = $1"
 const getAllCustomer = "Select * from customer"
 const loginQueryUsername = "SELECT * FROM customer WHERE username = $1"
-
+const addtocartUser = "INSERT INTO cart VALUES($1,$2)"
 const test = "Select * from test"
 
 
@@ -11,5 +11,6 @@ module.exports = {
     getUser,
     test,
     getAllCustomer,
-    loginQueryUsername
+    loginQueryUsername,
+    addtocartUser
 }
