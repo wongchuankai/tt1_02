@@ -61,17 +61,44 @@ const signup = async (req, res) => {
     })
 }
 
-const login = (req, res) => {
+const login = async (req, res) => {
     const body = req.body
     const username = body.username
     const password = body.password
-
-
-
+    console.log(username)
+    console.log(password)
+    pool.query(queries.loginQueryUsername, [username], (error, result) => {
+        if(error) {
+            return res.status(400).json({
+                success: false,
+                msg: "Error when signing up"
+            })
+        } 
+        console.log(result.rows)
+        if(result.rows.length === 0) {
+            return res.status(200).json({
+                success: false,
+                msg: "Invalid username"
+            })
+        }
+        const userResult = result.rows[0]
+        if (password === userResult.password) {
+            // const token = createToken( userResult.userid ,username)
+            return res.status(200).json({
+                success: true,
+                // token: token,
+                msg: "Login successful",
+            })
+        } else {
+            return res.status(200).json({
+                success: false,
+                // token: token,
+                msg: "Login unsuccessful",
+            })
+        }
     
-    return res.status(200).json( {success:true, msg:"login successfully."})
+    })
 }
-
 
 const getAllCustomer = (req, res) => {
     console.log("HERE")

@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express()
 const router = require('./router/router')
+require('./auth/auth');
 
 const apiPort = process.env.PORT || 8000
 
