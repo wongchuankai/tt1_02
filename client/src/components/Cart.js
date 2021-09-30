@@ -1,3 +1,5 @@
+import React from "react";
+
 const Cart = ({ cart, onRemove, onChangeAmt }) => {
   return (
     <div>

@@ -68,3 +68,7 @@ button.badge {
   color: #ffffff;
   width: 1.5rem;
 }
+
+.category-container {
+  display: flex;
+}
