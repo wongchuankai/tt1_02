@@ -1,21 +1,6 @@
 import React, { useEffect } from "react";
 
-const Cart = ({ cart, onRemove, onChangeAmt }) => {
-  // const getTotals = () => {
-  //   if (cart.length > 0) {
-  //     let total_price = cart.reduce((total, item) => {
-  //       total += item.price;
-  //       // total.qty += item.qty;
-  //       return total;
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getTotals();
-  // }, [cart]);
-
-  // const totals = cart.map((item) => {price: item.price, qty: item.qty});
+const Cart = ({ cart, onRemove, onChangeAmt, onCheckout }) => {
   const total_price = cart
     .reduce((acc, item) => (acc += item.price * item.amount), 0)
     .toFixed(2);
@@ -27,6 +12,7 @@ const Cart = ({ cart, onRemove, onChangeAmt }) => {
       <div>
         <h2>Total price: ${total_price}</h2>
         <h2>Items in cart: {total_qty}</h2>
+        <button onClick={onCheckout}>Checkout</button>
       </div>
       {cart.map((item) => {
         return (
