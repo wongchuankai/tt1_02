@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 const user_controller = require('../controller/user-controller')
 const shop_controller = require('../controller/shop-controller')
 
+router.post("/test", user_controller.test)
 router.post("/signup", user_controller.signup )
+router.get('/getAllCustomer', user_controller.getAllCustomer)
 router.post(
     '/login',
     async (req, res, next) => {
