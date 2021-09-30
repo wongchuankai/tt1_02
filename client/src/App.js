@@ -33,16 +33,7 @@ function App() {
   };
 
   const onRemove = (id) => {
-    const exists = cart.find((item) => item.id === id);
-    if (exists.amount === 1) {
-      setCart(cart.filter((item) => item.id !== id));
-    } else {
-      setCart(
-        cart.map((item) =>
-          item.id === id ? { ...exists, amount: exists.amount - 1 } : item
-        )
-      );
-    }
+    setCart(cart.filter((item) => item.id !== id));
   };
 
   const onChangeAmt = (id, direction) => {

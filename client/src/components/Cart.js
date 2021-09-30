@@ -8,8 +8,9 @@ const Cart = ({ cart, onRemove, onChangeAmt }) => {
       {cart.map((item) => {
         return (
           <div>
-            <h3 onClick={() => onRemove(item.id)}>{item.id}</h3>
+            <h3>{item.id}</h3>
             <p>{item.amount}</p>
+            <button onClick={() => onRemove(item.id)}>delete</button>
             <button onClick={() => onChangeAmt(item.id, "inc")}>
               increase
             </button>
