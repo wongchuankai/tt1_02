@@ -19,12 +19,13 @@ function App() {
     if (exists) {
       setCart(
         cart.map((item) =>
-          item.id === item.id ? { ...exists, qty: exists.qty + 1 } : item
+          item.id === product.id ? { ...exists, qty: exists.qty + 1 } : item
         )
       );
     } else {
       setCart([...cart, { ...product, qty: 1 }]);
     }
+    console.log(cart);
   };
 
   return (
