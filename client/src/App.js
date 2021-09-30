@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Products from "./components/Products";
 import Topnavbar from "./components/Topnavbar";
+import Checkout from "./components/Checkout";
 import {
   BrowserRouter as Router,
   Route,
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route exact path="/products">
           <Products products={products} onAdd={onAdd} />
+        </Route>
+        <Route exact path="/checkout">
+          <Checkout />
         </Route>
       </Switch>
     </Router>
