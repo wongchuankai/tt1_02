@@ -12,6 +12,7 @@ const dev_config = {
     password: db_password,
     port: 5432,
 }
+
 const proConfig = {
     connectionString: process.env.DATABASE_URL,
     ssl: {

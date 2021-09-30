@@ -1,0 +1,38 @@
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Helvetica";
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+  
+}
+
+
+input {
+    padding: 0.rem;
+    margin: 0.3rem;
+    border-radius: 0.1rem;
+    border: 0.1rem #404040 solid;
+    width: 100%;
+    cursor: pointer;
+    
+}
+
+button {
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    margin: 0.3rem;
+    border-radius: 0.8rem;
+    border: 0.1rem #404040 solid;
+    background-color: #f0c040;
+    width: 100%;
+    cursor: pointer;
+  }
+button.add {
+    background-color: #40c0f0;
+    width: 1.5rem;
+  }

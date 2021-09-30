@@ -83,10 +83,10 @@ const login = async (req, res) => {
         }
         const userResult = result.rows[0]
         if (password === userResult.password) {
-            // const token = createToken( userResult.userid ,username)
+            const token = createToken( userResult.username ,username)
             return res.status(200).json({
                 success: true,
-                // token: token,
+                token: token,
                 msg: "Login successful",
             })
         } else {
@@ -99,7 +99,16 @@ const login = async (req, res) => {
     
     })
 }
-
+function createToken(username, username) {
+    const body = {
+        username: username,
+        username: username
+    }
+    const jwtToken = jwt.sign({
+        user: body
+    },"secret")
+    return jwtToken
+}
 const getAllCustomer = (req, res) => {
     console.log("HERE")
     pool.query(queries.getAllCustomer, (error, results) => {
