@@ -3,8 +3,12 @@ const router = Router()
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const user_controller = require('../controller/user-controller')
-const shop_controller = require('../controller/shop-controller')
+const shop_controller = require('../controller/shop-controller');
+const pool = require('../db/db');
 
+router.get("/test", (res, req) => {
+    
+})
 router.post("/signup", user_controller.signup )
 router.post(
     '/login',
