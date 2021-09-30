@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Products from "./components/Products";
 import Topnavbar from "./components/Topnavbar";
 import Checkout from "./components/Checkout";
@@ -17,6 +17,32 @@ import Cart from "./components/Cart";
 
 function App() {
   const [cart, setCart] = useState([]);
+  // const [products, setProducts] = useState([]);
+  // const [categories, setCategories] = useState([]);
+
+  // async function getProducts() {
+  //   try {
+  //     const res = await axios.get("");
+  //     setProducts(res.body);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
+
+  // async function getCategories() {
+  //   try {
+  //     const res = await axios.get("");
+  //     setCategories(res.body)
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getProducts()
+  //   getCategories
+  // }, [])
+
   const onAdd = (product) => {
     const exists = cart.find((item) => item.id === product.id);
     if (exists) {
@@ -28,7 +54,7 @@ function App() {
         )
       );
     } else {
-      setCart([...cart, { id: product.id, price: product.price, amount: 1 }]);
+      setCart([...cart, { ...product, amount: 1 }]);
     }
   };
 
