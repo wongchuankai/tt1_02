@@ -1,0 +1,38 @@
+version: "3"
+
+networks:
+  dbs-net:
+    driver: bridge
+
+services:
+
+  backend:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports: 
+      - 80:8000
+    networks:
+      - dbs-net
+
+  frontend:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    command: npm start
+    ports: 
+      - 81:3000
+    networks:
+      - dbs-net
+
+  db:
+    image: postgres:alpine
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    env_file: 
+      - ./db/configs/postgres.env
+    networks:
+      - dbs-net
+

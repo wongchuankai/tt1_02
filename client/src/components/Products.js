@@ -1,23 +1,12 @@
-import React from "react";
-import products from "../Dataset/products.json";
 import Product from "./Product";
 
-const Products = () => {
+const Products = ({ products, onAdd }) => {
   return (
-    <main>
-      <h2>Products</h2>
-      <div>
+    <main className="block">
+      <h1>Our products</h1>
+      <div className="row">
         {products.map((product) => {
-          const { id, title, price, description, image } = product;
-          return (
-            <Product
-              key={id}
-              title={title}
-              price={price}
-              desc={description}
-              img={image}
-            ></Product>
-          );
+          return <Product key={product.id} product={product} onAdd={onAdd} />;
         })}
       </div>
     </main>
