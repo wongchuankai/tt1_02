@@ -7,14 +7,8 @@ const Topnavbar = () => {
     <div>
       <Navbar bg="dark" variant="dark">
         <Nav>
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
           <Nav.Link as={Link} to="/products">
             Products
-          </Nav.Link>
-          <Nav.Link as={Link} to="/checkout">
-            Checkout
           </Nav.Link>
           <Nav.Link as={Link} to="/cart">
             Cart

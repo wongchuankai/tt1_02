@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Products from "./components/Products";
 import Topnavbar from "./components/Topnavbar";
-import Checkout from "./components/Checkout";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,10 +8,9 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
-import Home from "./components/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
-import products from "./Dataset/products.json";
-import categories from "./Dataset/categories.json";
+import productsRaw from "./Dataset/products.json";
+import categoriesRaw from "./Dataset/categories.json";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import useToken from './components/useToken';
@@ -34,6 +32,32 @@ function App() {
   if(!token) {
     return <Login setToken={setToken} />
   }
+  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState(productsRaw);
+  const [categories, setCategories] = useState(categoriesRaw);
+
+  // async function getProducts() {
+  //   try {
+  //     const res = await axios.get("");
+  //     setProducts(res.body);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
+
+  // async function getCategories() {
+  //   try {
+  //     const res = await axios.get("");
+  //     setCategories(res.body)
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getProducts()
+  //   getCategories
+  // }, [])
 
   const onAdd = (product) => {
     const exists = cart.find((item) => item.id === product.id);
@@ -46,7 +70,7 @@ function App() {
         )
       );
     } else {
-      setCart([...cart, { id: product.id, price: product.price, amount: 1 }]);
+      setCart([...cart, { ...product, amount: 1 }]);
     }
   };
 
@@ -61,6 +85,7 @@ function App() {
     ) {
       return setCart(cart.filter((item) => item.id !== id));
     }
+
     setCart(
       cart.map((item) => {
         if (item.id === id) {
@@ -75,23 +100,46 @@ function App() {
     );
   };
 
+  const onCheckout = () => {
+    // array of products in cart with updated quantities
+    let newProducts = cart.map((item) => {
+      let productToChange = products.find((product) => product.id === item.id);
+      return {
+        ...productToChange,
+        qty: productToChange.qty - item.amount,
+      };
+    });
+
+    // generate array of product ids for items in cart
+    let newProductIds = newProducts.map((item) => item.id);
+
+    // use array of product ids to remove from all products
+    let unchangedProducts = products.filter(
+      (item) => !newProductIds.includes(item.id)
+    );
+
+    // add back the changed products
+    const newProductsArray = [...unchangedProducts, ...newProducts];
+    setProducts(newProductsArray);
+    setCart([]);
+  };
+
   // getProducts, useEffect
 
   return (
     <Router>
       <Topnavbar />
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
         <Route exact path="/products">
           <Products products={products} categories={categories} onAdd={onAdd} />
         </Route>
-        <Route exact path="/checkout">
-          <Checkout />
-        </Route>
         <Route exact path="/cart">
-          <Cart cart={cart} onRemove={onRemove} onChangeAmt={onChangeAmt} />
+          <Cart
+            cart={cart}
+            onRemove={onRemove}
+            onChangeAmt={onChangeAmt}
+            onCheckout={onCheckout}
+          />
         </Route>
       </Switch>
     </Router>
