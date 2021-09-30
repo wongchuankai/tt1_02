@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Products from "./components/Products";
 import Topnavbar from "./components/Topnavbar";
-import Checkout from "./components/Checkout";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,7 +8,6 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
-import Home from "./components/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import productsRaw from "./Dataset/products.json";
 import categoriesRaw from "./Dataset/categories.json";
@@ -112,14 +110,8 @@ function App() {
     <Router>
       <Topnavbar />
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
         <Route exact path="/products">
           <Products products={products} categories={categories} onAdd={onAdd} />
-        </Route>
-        <Route exact path="/checkout">
-          <Checkout />
         </Route>
         <Route exact path="/cart">
           <Cart
