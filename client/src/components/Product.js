@@ -3,7 +3,7 @@ import React from "react";
 const Product = ({ title, price, desc, img, qty }) => {
   return (
     <div>
-      <img src={img} alt={title} />
+      <img src={img} alt={title} className="small" />
       <h3>{title}</h3>
       <div>${price}</div>
       <p>{desc}</p>

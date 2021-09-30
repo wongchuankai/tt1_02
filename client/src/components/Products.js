@@ -1,12 +1,11 @@
 import React from "react";
-import products from "../Dataset/products.json";
 import Product from "./Product";
 
-const Products = () => {
+const Products = ({ products }) => {
   return (
-    <main>
-      <h2>Products</h2>
-      <div>
+    <main className="block col-2">
+      <h1>Our products</h1>
+      <div className="row">
         {products.map((product) => {
           const { id, title, price, description, image } = product;
           return (
@@ -16,7 +15,7 @@ const Products = () => {
               price={price}
               desc={description}
               img={image}
-            ></Product>
+            />
           );
         })}
       </div>
