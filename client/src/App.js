@@ -14,6 +14,7 @@ import categoriesRaw from "./Dataset/categories.json";
 import Cart from "./components/Cart";
 import Login from "./components/Login";
 import useToken from "./components/useToken";
+import LoginFrontend from "./components/LoginFrontend";
 
 // function setToken(userToken) {
 //     sessionStorage.setItem('token', JSON.stringify(userToken));
@@ -29,35 +30,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [products, setProducts] = useState(productsRaw);
   const [categories, setCategories] = useState(categoriesRaw);
-
-  const { token, setToken } = useToken();
-
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
-
-  // async function getProducts() {
-  //   try {
-  //     const res = await axios.get("");
-  //     setProducts(res.body);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // }
-
-  // async function getCategories() {
-  //   try {
-  //     const res = await axios.get("");
-  //     setCategories(res.body)
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getProducts()
-  //   getCategories
-  // }, [])
+  const [token, setToken] = useState(false);
 
   const onAdd = (product) => {
     const exists = cart.find((item) => item.id === product.id);
@@ -126,24 +99,32 @@ function App() {
 
   // getProducts, useEffect
 
-  return (
-    <Router>
-      <Topnavbar />
-      <Switch>
-        <Route exact path="/products">
-          <Products products={products} categories={categories} onAdd={onAdd} />
-        </Route>
-        <Route exact path="/cart">
-          <Cart
-            cart={cart}
-            onRemove={onRemove}
-            onChangeAmt={onChangeAmt}
-            onCheckout={onCheckout}
-          />
-        </Route>
-      </Switch>
-    </Router>
-  );
+  if (!token) {
+    return <LoginFrontend setToken={setToken} />;
+  } else {
+    return (
+      <Router>
+        <Topnavbar />
+        <Switch>
+          <Route exact path="/products">
+            <Products
+              products={products}
+              categories={categories}
+              onAdd={onAdd}
+            />
+          </Route>
+          <Route exact path="/cart">
+            <Cart
+              cart={cart}
+              onRemove={onRemove}
+              onChangeAmt={onChangeAmt}
+              onCheckout={onCheckout}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
 }
 
 export default App;

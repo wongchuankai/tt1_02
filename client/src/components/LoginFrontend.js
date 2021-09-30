@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Login.css";
+import customers from "../Dataset/customers.json";
 
-async function loginUser(credentials) {
-  return fetch("http://localhost:8000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  })
-    .then((data) => data.json())
-    .catch(console.log("error"));
+function loginUser(credentials) {
+  const user = customers.find((item) => item.username === credentials.username);
+  if (user) {
+    if (user.password === credentials.password) {
+      return true;
+    }
+  }
+  return false;
 }
 
 export default function Login({ setToken }) {
@@ -20,10 +19,11 @@ export default function Login({ setToken }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
+    const token = loginUser({
       username,
       password,
     });
+    console.log(token);
     setToken(token);
   };
 
