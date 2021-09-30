@@ -1,17 +1,18 @@
 const Pool = require('pg').Pool
 
-const db_name = "dbs"
-const db_password =  "admin";
-const db_user =  "postgres";
-const db_host = "localhost"
+const db_name = process.env.POSTGRES_DB || "policy_db";
+const db_password = process.env.POSTGRES_PASSWORD || "password";
+const db_user =  process.env.POSTGRES_USER || "admin";
+const db_host = "postgresdb"
 
-const dev_config = {
-    user: db_user,
+const test_config = {
+    user:db_user,
     host: db_host,
     database: db_name,
     password: db_password,
-    port: 5432,
+    port: 5432
 }
+
 const proConfig = {
     connectionString: process.env.DATABASE_URL,
     ssl: {

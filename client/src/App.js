@@ -14,9 +14,27 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import products from "./Dataset/products.json";
 import categories from "./Dataset/categories.json";
 import Cart from "./components/Cart";
+import Login from "./components/Login";
+import useToken from './components/useToken';
+
+// function setToken(userToken) {
+//     sessionStorage.setItem('token', JSON.stringify(userToken));
+//   }
+  
+//   function getToken() {
+//     const tokenString = sessionStorage.getItem('token');
+//     const userToken = JSON.parse(tokenString);
+//     return userToken?.token
+//   }
 
 function App() {
-  const [cart, setCart] = useState([]);
+    const { token, setToken } = useToken();
+    const [cart, setCart] = useState([]);
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
+
   const onAdd = (product) => {
     const exists = cart.find((item) => item.id === product.id);
     if (exists) {
