@@ -67,6 +67,7 @@ function App() {
     ) {
       return setCart(cart.filter((item) => item.id !== id));
     }
+
     setCart(
       cart.map((item) => {
         if (item.id === id) {
@@ -82,6 +83,7 @@ function App() {
   };
 
   const onCheckout = () => {
+    // array of products in cart with updated quantities
     let newProducts = cart.map((item) => {
       let productToChange = products.find((product) => product.id === item.id);
       return {
@@ -90,17 +92,17 @@ function App() {
       };
     });
 
+    // generate array of product ids for items in cart
     let newProductIds = newProducts.map((item) => item.id);
 
+    // use array of product ids to remove from all products
     let unchangedProducts = products.filter(
       (item) => !newProductIds.includes(item.id)
     );
 
-    console.log("unchanged", unchangedProducts);
-
+    // add back the changed products
     const newProductsArray = [...unchangedProducts, ...newProducts];
     setProducts(newProductsArray);
-    console.log(newProductsArray);
     setCart([]);
   };
 
