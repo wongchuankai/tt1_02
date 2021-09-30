@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Product from "./Product";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Card, Button } from "react-bootstrap";
+
 import axios from "axios";
 
 const backendURL = process.env.BACKEND_URL || 'http://localhost:80';
@@ -18,21 +21,18 @@ const Products = ({ products, onAdd, categories }) => {
         <div className="category-container">
           {categories.map((category, index) => {
             return (
-              <div>
-                <img
-                  src={category.image}
-                  alt={category.name}
-                  className="small"
-                />
-                <p>{category.description}</p>
-                <button
-                  onClick={() => setCurrentCategory(category.id)}
+              <Card style={{ width: '23rem' }}>
+                <Card.Img variant="top" src={category.image} style = {{height: '100%'}} />
+                <Card.Body>
+                  <Card.Title>{category.title}</Card.Title>
+                  <Card.Text>
+                    {category.description}
+                  </Card.Text>
+                  <Button onClick={() => setCurrentCategory(category.id)}
                   key={index}
-                  type="botton"
-                >
-                  {category.name}
-                </button>
-              </div>
+                  type="botton">{category.name}</Button>
+                </Card.Body>
+              </Card>
             );
           })}
         </div>
