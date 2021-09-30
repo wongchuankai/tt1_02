@@ -10,8 +10,23 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
+import products from "./Dataset/products.json";
 
 function App() {
+  const [cart, setCart] = useState([]);
+  const onAdd = (product) => {
+    const exists = cart.find((item) => item.id === product.id);
+    if (exists) {
+      setCart(
+        cart.map((item) =>
+          item.id === item.id ? { ...exists, qty: exists.qty + 1 } : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, qty: 1 }]);
+    }
+  };
+
   return (
     <Router>
       <Topnavbar />
@@ -20,7 +35,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/products">
-          <Products />
+          <Products products={products} onAdd={onAdd} />
         </Route>
       </Switch>
     </Router>

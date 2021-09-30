@@ -1,15 +1,17 @@
 import React from "react";
 
-const Product = ({ title, price, desc, img, qty }) => {
+const Product = ({ product, onAdd }) => {
   return (
     <div>
-      <img src={img} alt={title} className="small" />
-      <h3>{title}</h3>
-      <div>${price}</div>
-      <p>{desc}</p>
-      <p>In stock: {qty}</p>
+      <img src={product.image} alt={product.title} className="small" />
+      <h3>{product.title}</h3>
+      <div>${product.price}</div>
+      <p>{product.description}</p>
+      <p>
+        In stock: <span>{product.qty}</span>
+      </p>
       <div>
-        <button>Add To Cart</button>
+        <button onClick={() => onAdd(product)}>Add To Cart</button>
       </div>
     </div>
   );
