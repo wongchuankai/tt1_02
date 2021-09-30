@@ -19,8 +19,7 @@ a {
   text-decoration: none;
 }
 .row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
 }
 .row.center {
   align-items: center;
