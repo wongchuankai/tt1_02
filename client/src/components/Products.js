@@ -1,4 +1,3 @@
-import React from "react";
 import products from "../Dataset/products.json";
 import Product from "./Product";
 
