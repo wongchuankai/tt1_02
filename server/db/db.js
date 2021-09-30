@@ -1,9 +1,9 @@
 const Pool = require('pg').Pool
 
 const db_name = process.env.POSTGRES_DB || "policy_db";
-const db_password = process.env.POSTGRES_PASSWORD || "admin";
-const db_user =  process.env.POSTGRES_USER || "postgres";
-const db_host = "localhost"
+const db_password = process.env.POSTGRES_PASSWORD || "password";
+const db_user =  process.env.POSTGRES_USER || "admin";
+const db_host = "postgresdb"
 
 const dev_config = {
     user: db_user,

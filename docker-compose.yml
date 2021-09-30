@@ -29,14 +29,16 @@ services:
 
   db:
     image: postgres:alpine
+    container_name: "postgresdb"
     volumes:
       - ./data/db:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    env_file: 
-      - ./db/configs/postgres.env
     networks:
       - dbs-net
+    env_file: 
+      - ./db/configs/postgres.env
+
 
   # added for easy config
   pgadmin:
