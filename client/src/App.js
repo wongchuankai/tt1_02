@@ -52,6 +52,7 @@ function App() {
               direction === "inc" ? (item.amount += 1) : (item.amount -= 1),
           };
         }
+        return item;
       })
     );
   };
