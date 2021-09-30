@@ -74,6 +74,7 @@ const login = (req, res) => {
 
 
 const getAllCustomer = (req, res) => {
+    console.log("HERE")
     pool.query(queries.getAllCustomer, (error, results) => {
         if(error) {
             console.log(error)
